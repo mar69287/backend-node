@@ -3,6 +3,8 @@ import * as dotenv from 'dotenv';
 import cors from 'cors';
 import morgan from 'morgan';
 
+import connectDB from './config/database.js';
+
 dotenv.config();
 
 const app = express();
@@ -17,6 +19,7 @@ const port = process.env.PORT || 8080;
 
 const startServer = async () => {
     try {
+      connectDB(process.env.DATABASE_URL);
       app.listen(8080, () => console.log(`Express app running on port ${port}`));
     } catch (error) {
       console.log(error);
